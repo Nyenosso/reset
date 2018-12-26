@@ -2,6 +2,7 @@
 
 html {
     box-sizing: border-box;
+    -webkit-text-size-adjust: 100%;
 }
 *, *:before, *:after {
     box-sizing: inherit;
@@ -12,17 +13,46 @@ html {
 body {
     margin: 0;
 }
+main {
+    display: block;
+}
 
 /* Grouping */
 
-ul {
-    margin: 0;
-    padding: 0;
+hr {
+    height: 0;
+    overflow: visible;
+    box-sizing: content-box;
 }
 li {
-    list-style-type: none;
+    list-style: none;
+}
+ol, ul {
+    margin: 0;
+    padding: `0;
+}
+
+/* Embedded */
+
+img {
+    display: block;
+    border-style: none;
 }
 figure {
     margin: 0;
 }
 
+/* Text */
+
+a {
+    background-color: transparent;
+}
+small {
+    font-size: 80%;
+}
+strong {
+    font-weight: bolder;
+}
+p, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
