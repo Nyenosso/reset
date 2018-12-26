@@ -1,0 +1,28 @@
+/* Head */
+
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+/* Sections */
+
+body {
+    margin: 0;
+}
+
+/* Grouping */
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+li {
+    list-style-type: none;
+}
+figure {
+    margin: 0;
+}
+
