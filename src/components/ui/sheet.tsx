@@ -41,7 +41,13 @@ export function Sheet({
             size === "md" && "md:w-[520px]",
             size === "lg" && "md:w-[680px]",
           )}
-          aria-describedby={description ? undefined : undefined}
+          tabIndex={-1}
+          onOpenAutoFocus={(e) => {
+            // Geen focusring op ‘Sluiten’ bij openen; velden met autoFocus behouden hun focus.
+            e.preventDefault();
+            const el = e.currentTarget as HTMLElement;
+            if (!el.contains(document.activeElement)) el.focus({ preventScroll: true });
+          }}
         >
           <div className="mx-auto mt-2 h-1 w-10 shrink-0 rounded-full bg-line md:hidden" aria-hidden />
           <div className={cn("flex items-start gap-3 px-4 pt-3 pb-2", hideTitle && "sr-only")}>

@@ -138,7 +138,7 @@ function Coach({ lesson }: { lesson: Lesson }) {
             </div>
           )}
           <p className="mt-auto pt-6 text-center text-[13px] text-white/50 tabular">
-            Les {formatClock(Math.floor(elapsed))} / {formatClock(total)}
+            {t.running ? "Loopt" : "Gepauzeerd"} · les {formatClock(Math.floor(elapsed))} / {formatClock(total)}
             {!wakeLockSupported() && " · zet automatische vergrendeling uit tijdens de les"}
           </p>
         </main>
@@ -164,7 +164,6 @@ function Coach({ lesson }: { lesson: Lesson }) {
           <CtrlButton label="Volgend interval" onClick={t.next}>
             <SkipForward className="size-7" />
           </CtrlButton>
-          <span className="w-14 text-center text-[12px] text-white/60">{t.running ? "Loopt" : "Gepauzeerd"}</span>
         </nav>
       )}
     </div>

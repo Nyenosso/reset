@@ -172,3 +172,40 @@ test("scenario B: formatkiezer geeft passende formats en voegt toe", async ({ pa
   await expect(page).toHaveURL(/\/lesmaker\/\?blok=/);
   await expect(page.getByLabel("Titel van het blok")).toBeVisible();
 });
+
+test("desktop: blok uit het bibliotheekpaneel naar de les slepen", async ({ page }, info) => {
+  test.skip(info.project.name !== "desktop", "alleen desktop");
+  await fresh(page, "/lesmaker/");
+  await openLessonFromTemplate(page, "Klassieke opbouw");
+  const panel = page.getByRole("complementary", { name: "Bibliotheek om te slepen" });
+  await panel.getByLabel("Zoek in bibliotheekpaneel").fill("Three Commands");
+  const item = panel.locator("li").filter({ hasText: "The Three Commands" }).first();
+  const slot = page.getByTestId("lesson-block").nth(2);
+  await slot.evaluate((el) => el.scrollIntoView({ block: "center" }));
+  const ib = (await item.boundingBox())!;
+  const sb = (await slot.boundingBox())!;
+  await page.mouse.move(ib.x + 20, ib.y + ib.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(ib.x + 10, ib.y + ib.height / 2 + 10, { steps: 3 });
+  await page.mouse.move(sb.x + sb.width / 2, sb.y + sb.height / 2, { steps: 15 });
+  await page.mouse.up();
+  await expect(page.getByTestId("lesson-block").nth(2)).toContainText("The Three Commands");
+  await expect(page.getByTestId("lesson-block")).toHaveCount(7);
+});
+
+test("PWA: app opent zonder verbinding na het eerste bezoek", async ({ page, context }, info) => {
+  test.skip(info.project.name !== "desktop", "één keer is genoeg");
+  await fresh(page, "/lesmaker/");
+  await page.evaluate(async () => {
+    const reg = await navigator.serviceWorker.ready;
+    return Boolean(reg.active);
+  });
+  // Bezoek de pagina’s één keer online zodat de schil en assets in de cache staan.
+  for (const p of ["/bibliotheek/", "/lessen/"]) await page.goto(p);
+  await context.setOffline(true);
+  await page.goto("/lessen/");
+  await expect(page.getByTestId("lesson-card").first()).toBeVisible();
+  await page.goto("/bibliotheek/");
+  await expect(page.getByTestId("result-count")).toContainText("resultaten");
+  await context.setOffline(false);
+});

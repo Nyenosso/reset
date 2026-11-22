@@ -6,15 +6,15 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "npx serve out",
+    "start": "node scripts/serve-static.mjs out 4173",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test --trace off",
+    "test:rls": "bash scripts/test-rls.sh",
     "check": "npm run typecheck && npm run lint && npm run test && npm run build",
-    "icons": "node scripts/generate-icons.mjs",
-    "seed:sql": "node --experimental-strip-types scripts/export-seed.ts"
+    "icons": "node scripts/generate-icons.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "6.3.1",
@@ -44,5 +44,8 @@
     "tailwindcss": "4.3.5",
     "typescript": "5.9.3",
     "vitest": "5.1.1"
+  },
+  "engines": {
+    "node": ">=20.9"
   }
 }
