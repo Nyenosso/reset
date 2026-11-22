@@ -92,12 +92,12 @@ function Coach({ lesson }: { lesson: Lesson }) {
       {mode === "lezen" ? (
         <ReadMode lesson={lesson} currentBlock={step?.blockIndex ?? -1} onJump={(bi) => { t.jump(firstStepOfBlock(steps, bi)); setMode("timer"); }} />
       ) : step && block ? (
-        <main className="flex flex-1 flex-col px-5 pb-[calc(110px+env(safe-area-inset-bottom))] pt-4" aria-live="polite">
+        <main className="flex flex-1 flex-col px-5 pb-[calc(124px+env(safe-area-inset-bottom))] pt-3" aria-live="polite">
           <p className="text-[13px] font-semibold uppercase tracking-[0.12em] text-[#ff8a5c]" data-testid="coach-block">
             Blok {step.blockIndex + 1} — {block.title}
           </p>
-          {blockContentLine(block) && <p className="mt-1 text-[17px] font-medium leading-snug text-white/90">{blockContentLine(block)}</p>}
-          <div className="mt-6 text-center">
+          {blockContentLine(block) && <p className="mt-1 line-clamp-2 text-[17px] font-medium leading-snug text-white/90">{blockContentLine(block)}</p>}
+          <div className="mt-4 text-center">
             <p className={cn("text-[22px] font-semibold", step.kind === "work" ? "text-white" : "text-white/70")} data-testid="coach-step">
               {step.label}
             </p>
@@ -145,7 +145,8 @@ function Coach({ lesson }: { lesson: Lesson }) {
       ) : null}
 
       {mode === "timer" && (
-        <nav aria-label="Timerbediening" className="fixed inset-x-0 bottom-0 flex items-center justify-center gap-4 bg-[#141311]/95 px-4 pb-[max(16px,env(safe-area-inset-bottom))] pt-3">
+        <nav aria-label="Timerbediening" className="fixed inset-x-0 bottom-0 z-10 flex items-center justify-center gap-4 border-t border-white/10 px-4 pb-[max(16px,env(safe-area-inset-bottom))] pt-3"
+          style={{ backgroundColor: "#141311" }}>
           <CtrlButton label="Opnieuw beginnen" onClick={t.reset}>
             <RotateCcw className="size-6" />
           </CtrlButton>
