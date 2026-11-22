@@ -87,9 +87,9 @@ De status zie je rechtsboven (iPhone) of linksonder (desktop): *Demo · alleen o
 
 FightLab is een statische export (`out/`) en draait op elke statische host.
 
-**Vercel** (voorkeur): importeer de GitHub-repository op [vercel.com/new](https://vercel.com/new); het framework wordt herkend. Voeg de twee `NEXT_PUBLIC_…`-variabelen toe en klik Deploy. Elke push naar `main` publiceert automatisch; elke pull request krijgt een previewlink.
+**Vercel** (voorkeur): importeer de GitHub-repository op [vercel.com/new](https://vercel.com/new); het framework wordt herkend. Voeg de twee `NEXT_PUBLIC_…`-variabelen toe en klik Deploy. Elke push naar de standaardbranch (`master`) publiceert automatisch; elke pull request krijgt een previewlink.
 
-**Netlify**: ‘Add new site → Import from Git’; `netlify.toml` regelt build (`npm run build`) en map (`out`). Voeg dezelfde variabelen toe.
+**Netlify**: ‘Add new project → Import an existing project → GitHub’, kies deze repository en branch `master`; `netlify.toml` regelt build (`npm run build`) en map (`out`). Voeg (optioneel) dezelfde variabelen toe onder *Project configuration → Environment variables*.
 
 ## Op je iPhone
 

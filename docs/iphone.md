@@ -35,7 +35,7 @@ Je hebt geen terminal of laptop nodig.
 
 **Eenmalig:**
 1. Zorg dat de code op GitHub staat (deze repository) en dat Claude toegang heeft: koppel GitHub via [claude.ai/connect-github](https://claude.ai/connect-github) en installeer de Claude GitHub App op de repository.
-2. Koppel de repository aan Vercel of Netlify (zie README → *Publiceren*). Elke wijziging op `main` wordt dan automatisch gepubliceerd; elke pull request krijgt een previewlink.
+2. Koppel de repository aan Netlify (of Vercel; zie README → *Publiceren*). Elke wijziging op `master` wordt dan automatisch gepubliceerd; elke pull request krijgt een previewlink.
 
 **Elke keer dat je iets wilt veranderen:**
 1. Open de Claude-app of [claude.ai/code](https://claude.ai/code) en start een sessie op deze repository.
