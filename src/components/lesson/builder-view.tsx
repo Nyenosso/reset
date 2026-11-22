@@ -121,6 +121,7 @@ function Workspace({ lesson }: { lesson: Lesson }) {
     <>
       <PageHeader
         title="Lesmaker"
+        wide
         actions={
           <>
             <SyncBadge />

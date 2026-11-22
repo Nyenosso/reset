@@ -93,8 +93,9 @@ const BLOCKS: BlockSeed[] = [
   {
     title: "Fighter Conditioning", d: "Full-body vechtersconditie zonder handschoenwissel.", phase: "sc", format: "Giant Set",
     ex: [["Continuous 1-2", "30 sec"], ["Sprawl + 1-2", "30 sec"], ["Lowkick Repeater", "30 sec"], ["Squat Punches", "30 sec"]],
-    st: ST(3, [["Continuous 1-2", "work", 30], ["Sprawl + 1-2", "work", 30], ["Lowkicks", "work", 30], ["Squat punches", "work", 30], ["Rust", "rest", 20]]), org: "individueel", eq: "bokszak,lichaamsgewicht", gl: "aan", rpe: [8, 9], g: "conditie,fullbody,spieruithouding",
-    instr: "Drie rondes van vier oefeningen à 30 sec zonder pauze, 20 sec rust. Iedereen aan de eigen zak; bij tweetallen per zak om en om per oefening.",
+    st: ST(3, [["Continuous 1-2", "work", 30], ["Sprawl + 1-2", "work", 30], ["Lowkicks", "work", 30], ["Squat punches", "work", 30], ["Rust", "rest", 20]]), org: "tweetallen", eq: "bokszak,lichaamsgewicht", gl: "aan", rpe: [8, 9], g: "conditie,fullbody,spieruithouding",
+    instr: "Drie rondes van vier oefeningen à 30 sec zonder pauze, 20 sec rust. Per zak twee deelnemers: zakwerk (1-2, lowkicks) en vloerwerk (sprawl, squat punches) wisselen elkaar af, zodat niemand op een zak hoeft te wachten.",
+    roles: "Tijdens zakwerk van A doet B het vloerwerk naast de zak; volgende oefening omgekeerd.",
     cues: ["Doseer: het is een lange set", "Sprawl: heupen naar de vloer"], easy: "Half burpee in plaats van sprawl.", hard: "Burpee + Eight Punches als tweede oefening.", tags: "conditie,fullbody",
   },
   {

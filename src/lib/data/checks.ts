@@ -32,7 +32,7 @@ function formatOf(b: LessonBlock, lib: Library): Format | undefined {
 const isWork = (b: LessonBlock) => !["opening", "cooldown", "recovery"].includes(b.phase);
 const heavyLegs = (b: LessonBlock, ex: Exercise[]) =>
   b.rpe[1] >= 7 && (b.phase === "sc" || b.phase === "cardio" || b.phase === "finisher") && ex.some((e) => e.musclesPrimary.includes("benen") && ["squat", "lunge", "sprong"].includes(e.pattern));
-const shoulderLoad = (ex: Exercise[]) => ex.filter((e) => e.musclesPrimary.includes("schouders")).length >= Math.max(1, Math.ceil(ex.length / 2));
+const shoulderLoad = (ex: Exercise[]) => ex.length > 0 && ex.filter((e) => e.musclesPrimary.includes("schouders")).length * 2 > ex.length;
 const hasKicks = (ex: Exercise[]) => ex.some((e) => e.pattern === "trap" || e.categories.includes("trappen"));
 
 export function checkLesson(lesson: Lesson, lib: Library, prefs: Preferences): CheckResult[] {
@@ -60,10 +60,11 @@ export function checkLesson(lesson: Lesson, lib: Library, prefs: Preferences): C
       });
     }
     const f = formatOf(b, lib);
-    if (b.structure && b.structure.explainSec === 0 && f && f.logistics >= 2 && !b.placeholder) {
+    if (b.structure && b.structure.explainSec === 0 && f && f.logistics >= 2 && !b.placeholder && !["opening", "cooldown", "recovery"].includes(b.phase)) {
       out.push({ id: `explain-${b.id}`, level: "info", area: "tijd", message: `Blok ${nr(i)} (${f.name}) heeft geen uitlegtijd ingepland.`, blockIds: [b.id] });
     }
-    if (b.structure && b.organization !== "individueel" && b.organization !== "klassikaal" && !b.structure.intervals.some((iv) => iv.kind === "switch" || iv.kind === "reset") && b.structure.rounds > 1 && b.structure.intervals.length > 1) {
+    const roles = new Set((b.structure?.intervals ?? []).filter((iv) => iv.kind === "work").map((iv) => iv.label.trim().charAt(0)));
+    if (b.structure && roles.has("A") && roles.has("B") && !b.structure.intervals.some((iv) => iv.kind === "switch" || iv.kind === "reset" || iv.kind === "rest")) {
       out.push({ id: `switch-${b.id}`, level: "info", area: "tijd", message: `Blok ${nr(i)}: geen wisseltijd tussen partners ingepland.`, blockIds: [b.id] });
     }
   });
@@ -124,7 +125,7 @@ export function checkLesson(lesson: Lesson, lib: Library, prefs: Preferences): C
     run = [];
   };
   blocks.forEach((b, i) => {
-    if (!b.placeholder && b.rpe[1] >= 6 && exs[i].length && shoulderLoad(exs[i])) run.push(i);
+    if (!b.placeholder && b.rpe[1] >= 8 && shoulderLoad(exs[i])) run.push(i);
     else flushShoulder();
   });
   flushShoulder();

@@ -66,6 +66,7 @@ export function FormatPickerView() {
     <>
       <PageHeader
         title="Formatkiezer"
+        wide
         back={
           <Button asChild variant="ghost" size="iconSm" className="-ml-2" aria-label="Terug naar bibliotheek">
             <Link href="/bibliotheek/?tab=formats">

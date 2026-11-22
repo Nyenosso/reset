@@ -89,9 +89,14 @@ export function matchScore(item: Exercise | Format | TrainingBlock | LessonTempl
   const h = hay(item);
   const full = normalizeSearch(query);
   let score = 0;
+  const aliases = h.alias ? h.alias.split(" | ") : [];
   if (h.name === full) score += 200;
+  else if (aliases.includes(full)) score += 190;
   else if (h.name.startsWith(full)) score += 120;
   else if (h.name.includes(full)) score += 80;
+  else if (aliases.some((a) => a.startsWith(full))) score += 60;
+  // Kortere (basis)namen iets hoger bij gelijke relevantie.
+  score += Math.max(0, 12 - Math.floor(Math.max(0, h.name.length - full.length) / 2));
   for (const t of tokens) {
     if (h.name.includes(t)) score += h.name.split(/[\s-]+/).some((w) => w.startsWith(t)) ? 40 : 30;
     else if (h.alias.includes(t)) score += 25;
