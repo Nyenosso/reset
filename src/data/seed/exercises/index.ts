@@ -31,7 +31,7 @@ const SECTIONS: ExSection[] = [
 ];
 
 /** Standaard lesfasen per categorie (als een oefening geen eigen fasen opgeeft). */
-const CATEGORY_PHASES: Record<ExerciseCategory, Phase[]> = {
+export const CATEGORY_PHASES: Record<ExerciseCategory, Phase[]> = {
   raise: ["raise"],
   activate: ["activate"],
   mobilize: ["mobilize"],
@@ -53,7 +53,7 @@ const CATEGORY_PHASES: Record<ExerciseCategory, Phase[]> = {
 };
 
 /** Standaard trainingsdoelen per categorie (als een oefening geen eigen doelen opgeeft). */
-const CATEGORY_GOALS: Record<ExerciseCategory, Goal[]> = {
+export const CATEGORY_GOALS: Record<ExerciseCategory, Goal[]> = {
   raise: ["conditie", "coordinatie"],
   activate: ["kracht", "coordinatie"],
   mobilize: ["mobiliteit"],

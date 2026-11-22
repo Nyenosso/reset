@@ -137,7 +137,7 @@ export interface BlockContent {
   notes: string;
 }
 
-export interface TrainingBlock extends LibraryMeta, BlockContent {
+export interface TrainingBlock extends Omit<LibraryMeta, "notes">, BlockContent {
   kind: "block";
   description: string;
   tags: string[];
